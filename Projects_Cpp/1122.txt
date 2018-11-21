@@ -1,0 +1,115 @@
+#include <iostream>
+#include <ios>
+#include <iomanip>
+
+using namespace std;
+
+enum Spaces {BLANK = 1, RED = 2, BLUE = 3}; //Spaces on the gameboard
+const int COLUMN_SIZE = 6;
+
+void StudentInfo();
+void GameInfo();
+void BoardInt(Spaces gameBoard[][COLUMN_SIZE], int rowSize);
+void GameboardPrint();
+bool ColumnPrompt(int& columnNum, int& turnNum);
+
+int main(){
+        int rowSize = 0, columnNum = 0, turnNum; //Row size, column choosen, turns start at value 2
+        bool gameOver = false;
+        Spaces gameBoard[rowSize][COLUMN_SIZE];
+
+        StudentInfo();
+        GameInfo();
+
+        do{
+                cout << "How many rows do you want on the board? (4-6 inclusively) " << endl;
+                cin >> rowSize;
+
+                if(rowSize > 6 ||  rowSize < 4)
+                {
+                        cout << "Error: This value is out of range.\n" << endl;
+                }
+                else
+                {
+                        break;
+                }
+        } while(rowSize > 6 || rowSize < 4);
+
+        BoardInt(gameBoard, rowSize);
+
+        while(gameOver == false)
+        {
+                gameOver = ColumnPrompt(columnNum, turnNum);
+        }
+        return 0;
+}
+
+void StudentInfo(){
+        cout << "Info" << endl;
+}
+
+void GameInfo(){
+        cout << setfill('-') << setw(72) << "" << endl;
+        cout << "This program will set up a game board to play 1030 Connect using a board\nwhere the rows are determined by the user to be between 4 and 6, inclus-\nively, but the number of columns if fixed at 6.\n\nThen, the user (RED) will play against the computer (BLUE) to attempt\nto connect four discs in a row, either horizontal or vertical, on the board\nThe user (RED) will start the game." << endl;
+        cout << setfill('-') << setw(72) << "" << endl;
+}
+
+void GameboardPrint(){
+        cout << "Test" << endl;
+}
+
+void BoardInt(Spaces gameBoard[][COLUMN_SIZE], int rowSize){
+        char letter[6] = {'A','B','C','D','E','F'}; //array for row characters
+
+        cout << "\nInitializing game board...\n" << endl;
+        cout << "    1 2 3 4 5 6  " << endl;
+        cout << "  +-------------+" << endl;
+        for(int i = 0;i < rowSize; ++i)
+        {
+                cout << letter[i] << " | ";
+                for(int j = 0;j < COLUMN_SIZE; ++j)
+                {
+                        gameBoard[i][j] = BLANK;
+                        switch(gameBoard[i][j]){ //switch statement for printing gameboard
+                                case BLANK:
+                                         cout << "- ";
+                                        break;
+
+                                default:
+                                        cout << "- ";
+                                        break;
+                        }
+                }
+                cout << "|" <<  endl;
+        }
+        cout << "  +-------------+" << endl;
+}
+
+bool ColumnPrompt(int& columnNum, int& turnNum){
+        turnNum = 2;
+
+        do{
+                if((turnNum % 2) == 0)
+                {
+                        cout << "\nRED MOVE: Enter column to place RED disc: " << endl;
+                        cin >> columnNum;
+
+                }
+                else if((turnNum % 2) == 1)
+                {
+                        cout << "\nBLUE MOVE: Enter column to place BLUE disc: " << endl;
+                        cin >> columnNum;
+                }
+                else{}
+                if(columnNum > COLUMN_SIZE || columnNum < 1)
+                {
+                        cout << "\nError: This value is out of range." << endl;
+                }
+                else
+                {
+                        break;
+                }
+          } while(columnNum > COLUMN_SIZE || columnNum < 1);
+        ++turnNum;
+        return true;
+ }

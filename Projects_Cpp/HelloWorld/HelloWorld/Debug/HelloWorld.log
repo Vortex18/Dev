@@ -1,0 +1,3 @@
+﻿  Main.cpp
+c:\dev\projects_cpp\helloworld\helloworld\main.cpp(13): error C2653: 'this_thread': is not a class or namespace name
+c:\dev\projects_cpp\helloworld\helloworld\main.cpp(13): error C3861: 'sleep_for': identifier not found
